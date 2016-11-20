@@ -1,20 +1,40 @@
+/*Lighter Orange: F25F1E
+Darker Orange:    E74514
+Light Brown:      CB7C3F
+dark brown:       744329
+Bright Yellow:    FFE418
+This Darker Yellow will be for .wells from bootstrap
+Darker Yellow:    DE8E13
+*/
+
+
 #search_button{
-    border: groove;
+    border: outset;
     border-radius: 20px;
 }
 #jumbo_search{
-    background-color: #c0703c;
+    background-color: #CB7C3F;
     border: inset;
     border-radius: 20px;
+    border-color: #FFE418;
+    color: #FFE418;
 }
 :focus{
-    color: #f5d01b;
+    color: #FFE418;
     border-radius: 20px;
     outline: none;
+
 }
 #jumbo{
-    background: #da8216;
+    background: #F25F1E;
 }
 body{
     background-color: #FFE418
+}
+button#search_button {
+    border-color: #FFE418;
+    background-color: #CB7C3F; /*same as jumbo-search*/
+    color: #F25F1E;
+    padding: 15px 32px;
+    text-align: center;
 }
