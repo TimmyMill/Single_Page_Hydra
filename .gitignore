@@ -1,3 +1,7 @@
 # Created by .ignore support plugin (hsz.mobi)
 key.py
 hydra
+__pycache__
+*.pyc
+venv/
+.idea/
