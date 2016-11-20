@@ -1,5 +1,7 @@
 import requests
-import key
+
+from single_page_hydra.api import key
+
 
 class pixapi:
     def __init__(self):

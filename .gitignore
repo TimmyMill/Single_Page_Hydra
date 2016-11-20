@@ -1,5 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
-key.py
+single_page_hydra/api/key.py
 hydra
 __pycache__
 *.pyc

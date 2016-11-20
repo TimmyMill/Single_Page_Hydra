@@ -8,18 +8,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../static/main.css">
+    <link rel="stylesheet" href="../static/css/main.css">
 </head>
 <body>
-<div class="jumbotron text-center">
-  <h1>Encyclopedia
+<div class="jumbotron text-center" id="jumbo">
+  <h1>
       <form action="/search" method="post">
-          <input type="text" value="Enter Search Query" name="jumbo_search">
-          <button type="submit" class="btn btn-primary" name="search_button">Search
+          <input type="text" placeholder="Please Enter A Search..." id="jumbo_search">
+          <button type="submit" id="search_button">
               <span class="glyphicon glyphicon-search"></span>
           </button>
       </form>
   </h1>
+    <h2>Encyclopedia</h2>
 </div>
 <div class="container">
 
