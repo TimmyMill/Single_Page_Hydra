@@ -1,11 +1,11 @@
 import requests
 
-from single_page_hydra.api import keys as KEY
+from single_page_hydra.api.keys import PIX_KEY as KEY
 
 
 class pixapi:
     def __init__(self):
-        self.key = '?key=' + (KEY.PIX_KEY)
+        self.key = '?key=' + KEY
         self.base_url = 'https://pixabay.com/api/'
         self.q = '&q='
         self.image_type = '&image_type=all'
@@ -30,11 +30,12 @@ class pixapi:
         else:
             video_url = None
 
-        return {
-            'pixabay':
-                {
-                    'images': image_urls,
-                    'video': video_url
-                }
-        }
+        return \
+            {
+                'pixabay':
+                    {
+                        'images': image_urls,
+                        'video': video_url
+                    }
+            }
 
