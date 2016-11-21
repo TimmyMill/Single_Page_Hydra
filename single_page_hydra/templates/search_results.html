@@ -1,0 +1,9 @@
+<div class="container">
+    <p>Image urls:</p>
+    {% for image_url in results['pixabay']['images'] %}
+        {{ image_url }}
+    {% endfor %}
+
+    <p>Video URL</p>
+    {{ results['pixabay']['video'] }}
+</div>

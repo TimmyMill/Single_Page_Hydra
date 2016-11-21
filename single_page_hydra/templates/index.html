@@ -13,8 +13,8 @@
 <body>
 <div class="jumbotron text-center" id="jumbo">
     <h1>
-        <form action="/search" method="post">
-            <input type="text" placeholder="Please Enter A Search..." id="jumbo_search">
+        <form action="{{ url_for('search') }}" method="post">
+            <input type="text" name="search_query" placeholder="Please Enter A Search..." id="jumbo_search">
             <button type="submit" id="search_button">
                 <span class="glyphicon glyphicon-search"></span>
             </button>
