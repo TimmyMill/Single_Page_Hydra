@@ -5,3 +5,4 @@ __pycache__
 *.pyc
 venv/
 .idea/
+single_page_hydra/static/images/pixabay/
