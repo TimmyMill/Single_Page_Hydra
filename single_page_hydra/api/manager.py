@@ -4,6 +4,7 @@ from single_page_hydra.api.cache import DumbCache
 from single_page_hydra.api.clients import (
     pixapi,
     WikiAPI,
+    TwitterAPI,
 )
 
 
@@ -13,6 +14,7 @@ class ApiManager:
         self._clients = [
             pixapi(),
             WikiAPI(),
+            TwitterAPI(),
         ]
 
     def search(self, query):
