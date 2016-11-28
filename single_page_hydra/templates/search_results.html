@@ -79,8 +79,8 @@
 <div class="tall_col col-sm-12">
     {#    THIS SECTION WILL ONLY ADD TWEETS IF THEY EXIST AND DO THREE IN A ROW, THEN THREE MORE#}
     {%- if results['Twitter']|length > 0 %}
-        {% for four in results['Twitter'] %}
-            {% if loop.index % 4 == 0 %}
+        {% for tweet in results['Twitter'] %}
+            {% if (loop.index % 4 == 0) or loop.index==1  %}
             <div class="col-sm-12 row">
                 <div class="alert alert-warning col-sm-3 alert-dismissable fade in">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
