@@ -1,7 +1,7 @@
 from pprint import pprint
 
-from single_page_hydra.api import ApiManager
-from single_page_hydra.api.clients.PixApi import pixapi
+
+from single_page_hydra.api.manager import ApiManager
 import json
 
 # pa = pixapi()

@@ -5,6 +5,7 @@ from single_page_hydra.api.keys import PIX_KEY as KEY
 
 
 class ImageDownloader:
+
     """ Downloads images from pixabay to avoid hot linking."""
     def __init__(self):
         import single_page_hydra
@@ -59,7 +60,7 @@ class pixapi:
 
     def search(self, query):
         images_json = self.search_image(query)
-        image_urls = [image['webformatURL'] for image in images_json['hits']]
+        image_urls =[image['webformatURL'] for image in images_json['hits']]
         images = self.downloader.get_filenames(image_urls)
 
         video_json = self.search_video(query)
