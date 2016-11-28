@@ -6,8 +6,45 @@ Bright Yellow:    FFE418
 This Darker Yellow will be for .wells from bootstrap
 Darker Yellow:    DE8E13
 */
+/*.container{*/
+    /*height: 100%;*/
+    /*display:table;*/
 
+/*}*/
+/*.wik_div{*/
+    /*height: 100%;*/
+/*}*/
 
+img.result_image{
+    border-radius: 25px;
+    border: outset;
+    border-color: #F25F1E;
+
+}
+.not_main{
+    height:50%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+.search_title{
+    text-align: center;
+}
+.wiki_link{
+    color: #F25F1E;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #DE8E13;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #DE8E13;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #DE8E13;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #DE8E13;
+}
 #search_button{
     border: outset;
     border-radius: 20px;
