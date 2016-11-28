@@ -23,6 +23,8 @@ img.result_image{
 }
 .not_main{
     height:50%;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 .search_title{
     text-align: center;
