@@ -14,7 +14,10 @@ Darker Yellow:    DE8E13
 /*.wik_div{*/
     /*height: 100%;*/
 /*}*/
-
+.row{
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+}
 img.result_image{
     border-radius: 25px;
     border: outset;
