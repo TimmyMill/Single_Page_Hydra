@@ -10,6 +10,7 @@
     </h1>
     <h2>Encyclopedia</h2>
 </div>
+
 <div class="container">
     <div class="col-12-lg well">
         <h3 class="search_title">Results for {{ search }}</h3>
@@ -21,19 +22,7 @@
         {%- endif %}
         <p>{{ results['wikipedia']['summary'] }}</p>
     </div>
-    <div class="tall_col col-sm-3">
-        {#    THIS SECTION WILL ONLY ADD TWEETS IF THEY EXIST AND DO THREE IN A ROW, THEN THREE MORE#}
-        {%- if results['twitter']|length > 0 %}
-            {% set count=0 %}
-            {% for tweet in results['twitter'] %}
-
-
-
-            {% endfor %}
-
-        {%- endif %}
-    </div>
-{#THIS DIV IS THE IMAGE CAROUSEL#}
+    {#THIS DIV IS THE IMAGE CAROUSEL#}
     <div class="col-6-md">
         {%- if results['pixabay']['images']|length > 0 %}
             <div id="carousel" class="carousel slide" data-ride="carousel">
@@ -83,8 +72,27 @@
         {% else %}
             <h3>NO IMAGES WERE FOUND</h3>
         {%- endif %}
+
     </div>
-{#HERE ENDS THE IMAGE CAROUSEL#}
+    {#HERE ENDS THE IMAGE CAROUSEL#}
+</div>
+<div class="tall_col col-sm-12">
+    {#    THIS SECTION WILL ONLY ADD TWEETS IF THEY EXIST AND DO THREE IN A ROW, THEN THREE MORE#}
+    {%- if results['Twitter']|length > 0 %}
+        {% for four in results['Twitter'] %}
+            {% if loop.index % 4 == 0 %}
+            <div class="col-sm-12 row">
+                <div class="alert alert-warning col-sm-3 alert-dismissable fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    <strong>User: {{ results['Twitter'][loop.index - 1]['User'] }}</strong>
+                    <p>Text: {{ results['Twitter'][loop.index - 1]['Text'] }}</p>
+                </div>
+            </div>
+            {% endif %}
+
+        {% endfor %}
+
+    {%- endif %}
 </div>
 <script>
     $(document).load()
