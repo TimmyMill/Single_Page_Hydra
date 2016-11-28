@@ -1,9 +1,52 @@
-<div class="container">
-    <p>Image urls:</p>
-    {% for image_url in results['pixabay']['images'] %}
-        {{ image_url }}
-    {% endfor %}
-
-    <p>Video URL</p>
-    {{ results['pixabay']['video'] }}
+<link rel="stylesheet" href="../static/css/main.css">
+<div class="jumbotron not_main text-center" id="jumbo">
+    <h1>
+        <form action="{{ url_for('search') }}" method="post">
+            <input type="text" name="search_query" placeholder="Please Enter A Search..." id="jumbo_search">
+            <button type="submit" id="search_button">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </form>
+    </h1>
+    <h2>Encyclopedia</h2>
 </div>
+<div class="container">
+    <div class="col-12-lg">
+        <h3 class="search_title">Results for {{ search }}</h3>
+        <h4><a class='wiki_link' href="{{ results['wikipedia']['link'] }}">{{ search }}</a></h4>
+        {%- if results['pixabay']['video']%}
+            <h4><a href="{{ results['pixabay']['video'] }}" class="wiki_link">Video of {{ search }}</a></h4>
+        {% else %}
+        <h3>No videos of {{ search }} were found.</h3>
+    {%- endif %}
+        <p>{{ results['wikipedia']['summary'] }}</p>
+    </div>
+    <div>
+        {#    THIS SECTION WILL ONLY ADD TWEETS IF THEY EXIST AND DO THREE IN A ROW, THEN THREE MORE#}
+        {%- if results['twitter']|length > 0  %}
+            {% set count=0 %}
+            {% for tweet in results['twitter'] %}
+
+            {% endfor %}
+
+        {%- endif  %}
+    </div>
+    <div class="col-6-md">
+    {%- if results['pixabay']['images']|length > 0 %}
+        {%- for image_url in results['pixabay']['images'] %}
+            <div class="col-md-4 image_div" >
+                <img class='img-responsive img-rounded result_image' src="{{ url_for('static', filename = 'images/pixabay/' ) }}{{ image_url }}" >
+            </div>
+        {%- endfor %}
+        {% else %}
+        <h3>NO IMAGES WERE FOUND</h3>
+    {%- endif %}
+    </div>
+
+<div class="wik_div col-4-md">
+
+</div>
+</div>
+<script>
+    $(document).load()
+</script>

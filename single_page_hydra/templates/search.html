@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="../static/css/main.css">
 </head>
 <body>
-<div class="container text-center">
+<div id="content" class="container-fluid text-center">
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-12 container-fluid">
             <img src="../static/images/cats_circular.gif">
         </div>
     </div>
@@ -28,7 +28,7 @@
         $.post("{{ url_for("search_results") }}", {
             query: "{{ query }}"
         }, function (resp) {
-            $(".container").replaceWith(resp);
+            $("#content").replaceWith(resp);
         })
     })
 </script>
