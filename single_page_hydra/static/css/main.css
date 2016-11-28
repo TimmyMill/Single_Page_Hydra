@@ -17,36 +17,12 @@ Darker Yellow:    DE8E13
 
 img.result_image{
     border-radius: 25px;
-    border: outset #F25F1E;
+    border: outset;
+    border-color: #F25F1E;
+
 }
-
-.slider {
-    margin: 10px 0;
-    width: 250px;
-    height: 250px;
-    position: relative;
-    overflow: hidden;
-}
-
-.slider li {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-.carousel-inner > .item > img,
-.carousel-inner > .item > a > img {
-    /*width: 70%;*/
-    height: 300px;
-    margin: auto;
-}
-
-
 .not_main{
     height:50%;
-    padding-top: 50px;
-    padding-bottom: 50px;
 }
 .search_title{
     text-align: center;
