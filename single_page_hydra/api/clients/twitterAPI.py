@@ -15,27 +15,28 @@ class TwitterAPI():
 
 
 
-        self.twitter_stream = TwitterStream(auth=self.aouth, domain='userstream.twitter.com')
+        self.twitter_search= Twitter(auth=self.aouth)
 
 
 
 
-    def search(self, query):
+    def search(self, result):
 
 
-        iterator = self.twitter_stream.statuses.filter(track=query, language="en")
+        iterator = self.twitter_search.search.tweets(q=result, count=10, lang="en")
 
 
-        tweet_count = 10
+
         list_tweets = []
-        for tweet in iterator:
-            tweet_count -= 1
+        for tweet in iterator["statuses"]:
 
 
             json_tweet = json.dumps(tweet, indent=4)   # Parse the request result in json and Save in a variable
 
 
             tweets = json.loads(json_tweet)
+
+
             if 'text' in tweets:
                 tweet_text = tweets['text']
                 tweet_user = tweets['user']['name']
@@ -43,15 +44,10 @@ class TwitterAPI():
 
 
 
-            if tweet_count <= 0:
-
-                break
-
         return \
             {
               'Twitter': list_tweets
             }
-
 
 
 
