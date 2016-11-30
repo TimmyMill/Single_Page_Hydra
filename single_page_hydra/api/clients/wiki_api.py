@@ -1,4 +1,4 @@
-from wikipedia import wikipedia, summary, DisambiguationError
+from wikipedia import wikipedia, summary, DisambiguationError, PageError
 
 
 class WikiAPI:
@@ -14,6 +14,9 @@ class WikiAPI:
             titles = e.options
             # let's select the first one and return it
             self.article = wikipedia.page(titles[0])
+
+        except PageError:
+            self.article = wikipedia.page('HTTP 404')
 
         finally:
             title = self.article.title
