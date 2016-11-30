@@ -12,88 +12,141 @@
 </div>
 
 <div class="container">
-    <div class="col-12-lg well">
-        <h3 class="search_title">Results for {{ search }}</h3>
-        <h4><a class='wiki_link' href="{{ results['wikipedia']['link'] }}">{{ search }}</a></h4>
-        {%- if results['pixabay']['video'] %}
-            <h4><a href="{{ results['pixabay']['video'] }}" class="wiki_link">Video of {{ search }}</a></h4>
-        {% else %}
-            <h3>No videos of {{ search }} were found.</h3>
-        {%- endif %}
-        <p>{{ results['wikipedia']['summary'] }}</p>
+    <div class="row">
+        <div class="col-12-lg well">
+            <h3 class="search_title">Results for {{ search }}</h3>
+            <h4><a class='wiki_link' href="{{ results['wikipedia']['link'] }}">{{ search }}</a></h4>
+            {%- if results['pixabay']['video'] %}
+                <h4><a href="{{ results['pixabay']['video'] }}" class="wiki_link">Video of {{ search }}</a></h4>
+            {% else %}
+                <h3>No videos of {{ search }} were found.</h3>
+            {%- endif %}
+            <p>{{ results['wikipedia']['summary'] }}</p>
+        </div>
     </div>
-    {#THIS DIV IS THE IMAGE CAROUSEL#}
-    <div class="col-6-md">
-        {%- if results['pixabay']['images']|length > 0 %}
-            <div id="carousel" class="carousel slide" data-ride="carousel">
-                {#            indicators #}
-                <ol class="carousel-indicators">
-                    {% set carousel_count=0 %}
-                    {%- for image_url in results['pixabay']['images'] %}
-                        {% if carousel_count==0 %}
-                            <li data-target="#carousel" data-slide-to="{{ loop.index }}" class="active"></li>
-                            {% set carousel_count=carousel_count + 1 %}
-                        {% elif carousel_count >=1 %}
-                            <li data-target="#carousel" data-slide-to="{{ loop.index }}"></li>
-                        {% endif %}
-                    {% endfor %}
-                </ol>
 
+    <div class="row">
+        <!-- THIS DIV IS THE TWITTER CAROUSEL -->
+        <div class="col-md-4">
+            {%- if results['Twitter']|length > 0 %}
+                <div id="twitter-carousel" class="carousel slide vertical" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        {% set slide_count=0 %}
+                        {%- for tweet in results['Twitter'] %}
+                            {% if slide_count==0 %}
+                                <li data-target="#twitter-carousel" data-slide-to="{{ loop.index }}" class="active"></li>
+                                {% set slide_count=slide_count + 1 %}
+                            {% else %}
+                                <li data-target="#twitter-carousel" data-slide-to="{{ loop.index }}"></li>
+                            {% endif %}
+                        {% endfor %}
+                    </ol>
 
-                <div class="carousel-inner" role="listbox">
+                    <!-- Wrapper for Slides -->
+                    <div class="carousel-inner" role="listbox">
+                        {% set tweet_count = 0 %}
+                        {%- for tweet in results['Twitter'] %}
+                            {% if tweet_count == 0 %}
+                                <div class="active item">
+                                    <strong>User: {{ results['Twitter'][loop.index - 1]['User'] }}</strong>
+                                    <p>Text: {{ results['Twitter'][loop.index - 1]['Text'] }}</p>
+                                    {% set tweet_count = tweet_count + 1 %}
+                                </div>
+                            {% else %}
+                                <div class="item">
+                                    <strong>User: {{ results['Twitter'][loop.index - 1]['User'] }}</strong>
+                                    <p>Text: {{ results['Twitter'][loop.index - 1]['Text'] }}</p>
+                                    {% set tweet_count = tweet_count + 1 %}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
 
-                    {% set count2 = 0 %}
-                    {%- for image_url in results['pixabay']['images'] %}
-                        {% if count2 == 0 %}
-                            <div class="item active">
-                                <img src="{{ url_for('static', filename = 'images/pixabay/' ) }}{{ image_url }}"
-                                     height="400">
-                                {% set count2 = count2 + 1 %}
-                            </div>
-                        {% elif count2 >= 1 %}
-                            <div class="item">
-                                <img src="{{ url_for('static', filename = 'images/pixabay/' ) }}{{ image_url }}"
-                                     height="400">
-                                {% set count2 = count2 + 1 %}
-                            </div>
-                        {% endif %}
-                    {% endfor %}
+                    <!-- Controls -->
+                    <a class="carousel-control left" href="#twitter-carousel" data-slide="prev"></a>
+                    <a class="carousel-control right" href="#twitter-carousel" data-slide="next"></a>
+
                 </div>
-                {#    Controls#}
-                <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
-        {% else %}
-            <h3>NO IMAGES WERE FOUND</h3>
-        {%- endif %}
+            {%- endif %}
+        </div>
+
+        <!-- THIS DIV IS THE IMAGE CAROUSEL -->
+        <div class="col-md-8">
+            {%- if results['pixabay']['images']|length > 0 %}
+                <div id="image-carousel" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        {% set carousel_count=0 %}
+                        {%- for image_url in results['pixabay']['images'] %}
+                            {% if carousel_count==0 %}
+                                <li data-target="#image-carousel" data-slide-to="{{ loop.index }}" class="active"></li>
+                                {% set carousel_count=carousel_count + 1 %}
+                            {% elif carousel_count >=1 %}
+                                <li data-target="#image-carousel" data-slide-to="{{ loop.index }}"></li>
+                            {% endif %}
+                        {% endfor %}
+                    </ol>
+
+                    <!-- Wrapper for Slides -->
+                    <div class="carousel-inner" role="listbox">
+                        {% set count2 = 0 %}
+                        {%- for image_url in results['pixabay']['images'] %}
+                            {% if count2 == 0 %}
+                                <div class="item active">
+                                    <img src="{{ url_for('static', filename = 'images/pixabay/' ) }}{{ image_url }}">
+{#                                         height="400">#}
+                                    {% set count2 = count2 + 1 %}
+                                </div>
+                            {% elif count2 >= 1 %}
+                                <div class="item">
+                                    <img src="{{ url_for('static', filename = 'images/pixabay/' ) }}{{ image_url }}">
+{#                                         height="400">#}
+                                    {% set count2 = count2 + 1 %}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#image-carousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#image-carousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            {% else %}
+                <h3>NO IMAGES WERE FOUND</h3>
+            {%- endif %}
+
+        </div>
+        <!-- HERE ENDS THE IMAGE CAROUSEL -->
 
     </div>
-    {#HERE ENDS THE IMAGE CAROUSEL#}
+
 </div>
-<div class="tall_col col-sm-12">
+
+{#<div class="tall_col col-sm-12">#}
     {#    THIS SECTION WILL ONLY ADD TWEETS IF THEY EXIST AND DO THREE IN A ROW, THEN THREE MORE#}
-    {%- if results['Twitter']|length > 0 %}
-        {% for tweet in results['Twitter'] %}
-            {% if (loop.index % 4 == 0) or loop.index==1  %}
-            <div class="col-sm-12 row">
-                <div class="alert alert-warning col-sm-3 alert-dismissable fade in">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                    <strong>User: {{ results['Twitter'][loop.index - 1]['User'] }}</strong>
-                    <p>Text: {{ results['Twitter'][loop.index - 1]['Text'] }}</p>
-                </div>
-            </div>
-            {% endif %}
-
-        {% endfor %}
-
-    {%- endif %}
-</div>
+{#    {%- if results['Twitter']|length > 0 %}#}
+{#        {% for tweet in results['Twitter'] %}#}
+{#            {% if (loop.index % 4 == 0) or loop.index==1  %}#}
+{#            <div class="col-sm-12 row">#}
+{#                <div class="alert alert-warning col-sm-3 alert-dismissable fade in">#}
+{#                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>#}
+{#                    <strong>User: {{ results['Twitter'][loop.index - 1]['User'] }}</strong>#}
+{#                    <p>Text: {{ results['Twitter'][loop.index - 1]['Text'] }}</p>#}
+{#                </div>#}
+{#            </div>#}
+{#            {% endif %}#}
+{##}
+{#        {% endfor %}#}
+{##}
+{#    {%- endif %}#}
+{#</div>#}
 <script>
     $(document).load()
 </script>
