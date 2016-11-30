@@ -1,7 +1,24 @@
 import os
 import requests
+from queue import Queue
+from threading import Thread
 
 from single_page_hydra.api.keys import PIX_KEY as KEY
+
+
+class ProcessUrlWorker(Thread):
+    def __init__(self, proccess_url_func, urls, filenames):
+        super().__init__()
+        self.func = proccess_url_func
+        self.urls = urls
+        self.filenames = filenames
+
+    def run(self):
+        while True:
+            url = self.urls.get()
+            filename = self.func(url)
+            self.filenames.put(filename)
+            self.urls.task_done()
 
 
 class ImageDownloader:
@@ -24,20 +41,47 @@ class ImageDownloader:
         :rtype: list[str]
         """
 
-        # TODO: This needs some threading for the download.
-        filenames = list()
+        url_queue = Queue()
+        filename_queue = Queue()
+
+        # Fire up some worker threads.
+        for _ in range(10):
+            worker = ProcessUrlWorker(self._process_url, url_queue,
+                                      filename_queue)
+            worker.daemon = True
+            worker.start()
+
+        # Queue up some URLs to process.
         for url in urls:
-            filename = url.split('/')[-1]
-            filenames.append(filename)
-            image_path = os.path.join(self.images_dir, filename)
+            url_queue.put(url)
 
-            # Download the file if we don't have it.
-            if not os.path.isfile(image_path):
-                res = requests.get(url)
-                with open(image_path, 'wb') as f:
-                    f.write(res.content)
+        # Wait for threads to finish.
+        url_queue.join()
 
-        return filenames
+        return list(filename_queue.queue)
+
+    def _process_url(self, url):
+        filename = self._extract_filename(url)
+        image_path = os.path.join(self.images_dir, filename)
+        # Download the file if we don't have it.
+        if not os.path.isfile(image_path):
+            res = requests.get(url)
+            with open(image_path, 'wb') as f:
+                f.write(res.content)
+
+        return filename
+
+    @staticmethod
+    def _extract_filename(url):
+        filename = url.split('/')[-1]
+
+        # Normalize the filename because the same image from Pixabay can have
+        # different filenames.  I believe the first 10 characters of the
+        # filename are the ones we are interested in.
+        name, extension = filename.split('.')
+        name = name[:10]
+
+        return '{}.{}'.format(name, extension)
 
 
 class pixapi:
@@ -77,4 +121,3 @@ class pixapi:
                         'video': video_url
                     }
             }
-
