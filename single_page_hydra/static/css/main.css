@@ -14,34 +14,89 @@ Darker Yellow:    DE8E13
 /*.wik_div{*/
     /*height: 100%;*/
 /*}*/
-.row{
-    margin-bottom: -99999px;
-    padding-bottom: 99999px;
-}
+/*.row{*/
+    /*margin-bottom: -99999px;*/
+    /*padding-bottom: 99999px;*/
+/*}*/
 img.result_image{
     border-radius: 25px;
     border: outset #F25F1E;
 }
 
-.slide {
-    margin: 10px 0;
-    width: 250px;
-    height: 250px;
-    position: relative;
-    overflow: hidden;
+.not_main{
+    height:50%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+.search_title{
+    text-align: center;
+}
+.wiki_link{
+    color: #F25F1E;
 }
 
-.slide li {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #DE8E13;
 }
+::-moz-placeholder { /* Firefox 19+ */
+  color: #DE8E13;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #DE8E13;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #DE8E13;
+}
+#search_button{
+    border: outset;
+    border-radius: 20px;
+}
+#jumbo_search{
+    background-color: #CB7C3F;
+    border-radius: 20px;
+    border: inset #FFE418;
+    color: #FFE418;
+}
+:focus{
+    color: #FFE418;
+    border-radius: 20px;
+    outline: none;
+
+}
+#jumbo{
+    background: #F25F1E;
+}
+body{
+    background-color: #FFE418
+}
+button#search_button {
+    border-color: #FFE418;
+    background-color: #CB7C3F; /*same as jumbo-search*/
+    color: #F25F1E;
+    padding: 15px 32px;
+    text-align: center;
+}
+
+
+/*.slide {*/
+    /*margin: 10px 0;*/
+    /*width: 250px;*/
+    /*height: 250px;*/
+    /*position: relative;*/
+    /*overflow: hidden;*/
+/*}*/
+
+/*.slide li {*/
+    /*display: none;*/
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*left: 0;*/
+/*}*/
 
 .carousel-inner > .item > img,
 .carousel-inner > .item > a > img {
+    /*height: 500px;*/
     /*width: 70%;*/
-    height: 400px;
     margin: auto;
 }
 
@@ -49,7 +104,8 @@ img.result_image{
     created by: bootstraptor, http://www.bootply.com/63148 */
 
 .vertical .carousel-inner {
-  height: 100%;
+    display: block;
+    margin: auto;
 }
 
 .carousel.vertical .item {
@@ -87,60 +143,4 @@ img.result_image{
 
 .carousel.vertical .item {
     left: 0;
-}
-
-
-.not_main{
-    height:50%;
-    padding-top: 50px;
-    padding-bottom: 50px;
-}
-.search_title{
-    text-align: center;
-}
-.wiki_link{
-    color: #F25F1E;
-}
-
-::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  color: #DE8E13;
-}
-::-moz-placeholder { /* Firefox 19+ */
-  color: #DE8E13;
-}
-:-ms-input-placeholder { /* IE 10+ */
-  color: #DE8E13;
-}
-:-moz-placeholder { /* Firefox 18- */
-  color: #DE8E13;
-}
-#search_button{
-    border: outset;
-    border-radius: 20px;
-}
-#jumbo_search{
-    background-color: #CB7C3F;
-    border: inset;
-    border-radius: 20px;
-    border-color: #FFE418;
-    color: #FFE418;
-}
-:focus{
-    color: #FFE418;
-    border-radius: 20px;
-    outline: none;
-
-}
-#jumbo{
-    background: #F25F1E;
-}
-body{
-    background-color: #FFE418
-}
-button#search_button {
-    border-color: #FFE418;
-    background-color: #CB7C3F; /*same as jumbo-search*/
-    color: #F25F1E;
-    padding: 15px 32px;
-    text-align: center;
 }
