@@ -28,6 +28,7 @@ img.result_image{
     padding-top: 50px;
     padding-bottom: 50px;
 }
+
 .search_title{
     text-align: center;
 }
@@ -72,6 +73,7 @@ img.result_image{
 
 #jumbo{
     background: #F25F1E;
+    padding-bottom: 10%;
 }
 
 body{

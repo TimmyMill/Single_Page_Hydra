@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../static/css/main.css">
-  <link rel="stylesheet" href="../static/css/custom_carousel.css">
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/custom_carousel.css">
 </head>
 
 <body>
@@ -54,7 +54,7 @@
     <div class="col-sm-4" id="slider">
 
       {%- if results['Twitter']|length > 0 %}
-        <div class="col-sm-4" id="twitter-box">
+{#        <div class="" id="twitter-box">#}
           <!-- Twitter Carousel -->
           <div id="tweetCarousel" class="carousel slide vertical">
             <!-- Wrapper for Tweets -->
@@ -81,15 +81,15 @@
             </div><!--/Wrapper for Tweets-->
 
             <!-- Nav Controls -->
-            <a class="carousel vertical prev" href="#tweetCarousel" data-slide="prev">
+            <a class="carousel-control vertical prev" href="#tweetCarousel" data-slide="prev">
               <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
               <span class="sr-only">Previous</span></a>
-            <a class="carousel vertical next" href="#tweetCarousel" data-slide="next">
+            <a class="carousel-control vertical next" href="#tweetCarousel" data-slide="next">
               <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
               <span class="sr-only">Next</span></a>
           </div><!--/Twitter Carousel-->
 
-        </div><!--/Twitter Box-->
+{#        </div><!--/Twitter Box-->#}
       {%- endif %}
     </div><!--/Slider-->
 

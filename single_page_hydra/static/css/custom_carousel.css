@@ -25,11 +25,12 @@
 }
 
 /* Vertical Carousel code -
-    created by: bootstraptor, http://www.bootply.com/63148 */
+   original code from http://www.bootply.com/63148
+   modified by Timmy Milligan */
 
 .vertical .carousel-inner {
-    display: block;
-    float: left;
+    display: flex;
+    /*float: left;*/
     max-height: 100%;
     max-width: 100%;
 }
@@ -43,18 +44,20 @@
 }
 
 .carousel.vertical .active {
-  top: 0;
+    width: 100%;
+    top: 0;
 }
 
 .carousel.vertical .next {
-    position: absolute;
+    position: relative;
     top: 400px;
     left: 50%;
     right: 50%;
 }
 
 .carousel.vertical .prev {
-  top: -450px;
+  position: relative;
+  top: -400px;
   left: 50%;
   right: 50%;
 }
