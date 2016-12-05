@@ -58,7 +58,7 @@ img.result_image{
 
 #jumbo_search{
     background-color: #CB7C3F;
-    border-radius: 20px;
+    /*border-radius: 20px;*/
     border: inset #FFE418;
     color: #FFE418;
 }
@@ -84,13 +84,13 @@ body{
     margin-right: auto;
 }
 
-button#search_button {
-    border-color: #FFE418;
-    background-color: #CB7C3F; /*same as jumbo-search*/
-    color: #F25F1E;
-    padding: 15px 32px;
-    text-align: center;
-}
+/*#search_button {*/
+    /*border-color: #FFE418;*/
+    /*background-color: #CB7C3F; !*same as jumbo-search*!*/
+    /*color: #F25F1E;*/
+    /*padding: 15px 32px;*/
+    /*text-align: center;*/
+/*}*/
 
 text#tweets {
     text-align: center;
