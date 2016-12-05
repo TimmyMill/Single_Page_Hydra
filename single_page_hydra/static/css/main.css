@@ -38,37 +38,52 @@ img.result_image{
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: #DE8E13;
 }
+
 ::-moz-placeholder { /* Firefox 19+ */
   color: #DE8E13;
 }
+
 :-ms-input-placeholder { /* IE 10+ */
   color: #DE8E13;
 }
+
 :-moz-placeholder { /* Firefox 18- */
   color: #DE8E13;
 }
+
 #search_button{
     border: outset;
     border-radius: 20px;
 }
+
 #jumbo_search{
     background-color: #CB7C3F;
     border-radius: 20px;
     border: inset #FFE418;
     color: #FFE418;
 }
+
 :focus{
     color: #FFE418;
     border-radius: 20px;
     outline: none;
 
 }
+
 #jumbo{
     background: #F25F1E;
 }
+
 body{
     background-color: #FFE418
 }
+
+.center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 button#search_button {
     border-color: #FFE418;
     background-color: #CB7C3F; /*same as jumbo-search*/
@@ -77,70 +92,6 @@ button#search_button {
     text-align: center;
 }
 
-
-/*.slide {*/
-    /*margin: 10px 0;*/
-    /*width: 250px;*/
-    /*height: 250px;*/
-    /*position: relative;*/
-    /*overflow: hidden;*/
-/*}*/
-
-/*.slide li {*/
-    /*display: none;*/
-    /*position: absolute;*/
-    /*top: 0;*/
-    /*left: 0;*/
-/*}*/
-
-.carousel-inner > .item > img,
-.carousel-inner > .item > a > img {
-    /*height: 500px;*/
-    /*width: 70%;*/
-    margin: auto;
-}
-
-/* Vertical Carousel code -
-    created by: bootstraptor, http://www.bootply.com/63148 */
-
-.vertical .carousel-inner {
-    display: block;
-    margin: auto;
-}
-
-.carousel.vertical .item {
-  -webkit-transition: 0.6s ease-in-out top;
-     -moz-transition: 0.6s ease-in-out top;
-      -ms-transition: 0.6s ease-in-out top;
-       -o-transition: 0.6s ease-in-out top;
-          transition: 0.6s ease-in-out top;
-}
-
-.carousel.vertical .active {
-  top: 0;
-}
-
-.carousel.vertical .next {
-  top: 400px;
-}
-
-.carousel.vertical .prev {
-  top: -400px;
-}
-
-.carousel.vertical .next.left,
-.carousel.vertical .prev.right {
-  top: 0;
-}
-
-.carousel.vertical .active.left {
-  top: -400px;
-}
-
-.carousel.vertical .active.right {
-  top: 400px;
-}
-
-.carousel.vertical .item {
-    left: 0;
+text#tweets {
+    text-align: center;
 }
