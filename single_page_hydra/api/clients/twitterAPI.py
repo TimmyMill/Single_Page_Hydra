@@ -1,3 +1,4 @@
+
 '''
 Handles all the requests to twitter.api
 And Return a customized result
@@ -48,7 +49,6 @@ class TwitterAPI():
             {
               'Twitter': list_tweets
             }
-
 
 
 

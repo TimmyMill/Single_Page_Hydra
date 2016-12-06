@@ -1,99 +1,198 @@
-<link rel="stylesheet" href="../static/css/main.css">
-<div class="jumbotron not_main text-center" id="jumbo">
-    <h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/custom_carousel.css">
+</head>
+
+<body>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="jumbotron text-center" id="jumbo">
+        <h2>Encyclopedia</h2>
         <form action="{{ url_for('search') }}" method="post">
-            <input type="text" name="search_query" placeholder="Please Enter A Search..." id="jumbo_search">
-            <button type="submit" id="search_button">
-                <span class="glyphicon glyphicon-search"></span>
-            </button>
+          <div class="col-md-6 col-md-offset-3">
+            <div class="input-group input-group-lg">
+              <input class="form-control" id="jumbo_search" type="text" name="search_query" placeholder="Search for...">
+              <span class="input-group-btn">
+                      <button class="btn btn-default" type="submit" ><i
+                          class="glyphicon glyphicon-search"></i></button>
+              </span>
+            </div><!-- end input-group -->
+              <br>
+          </div><!-- end column -->
         </form>
-    </h1>
-    <h2>Encyclopedia</h2>
-</div>
+      </div><!-- end jumbotron -->
+    </div><!-- end column -->
+  </div><!-- end row -->
+</div><!-- end container -->
 
 <div class="container">
-    <div class="col-12-lg well">
-        <h3 class="search_title">Results for {{ search }}</h3>
-        <h4><a class='wiki_link' href="{{ results['wikipedia']['link'] }}">{{ search }}</a></h4>
-        {%- if results['pixabay']['video'] %}
-            <h4><a href="{{ results['pixabay']['video'] }}" class="wiki_link">Video of {{ search }}</a></h4>
-        {% else %}
-            <h3>No videos of {{ search }} were found.</h3>
-        {%- endif %}
-        <p>{{ results['wikipedia']['summary'] }}</p>
+  <div class="row">
+    <div class="col-9-sm well well-sm">
+      <h3 class="search_title">Results for {{ search }}</h3>
+      <h4><a class='wiki_link' href="{{ results['wikipedia']['link'] }}">{{ search }}</a></h4>
+      {%- if results['pixabay']['video'] %}
+        <h4><a href="{{ results['pixabay']['video'] }}" class="wiki_link">Video of {{ search }}</a></h4>
+      {% else %}
+        <h3>No videos of {{ search }} were found.</h3>
+      {%- endif %}
+      <p>{{ results['wikipedia']['summary'] }}</p>
     </div>
-    {#THIS DIV IS THE IMAGE CAROUSEL#}
-    <div class="col-6-md">
-        {%- if results['pixabay']['images']|length > 0 %}
-            <div id="carousel" class="carousel slide" data-ride="carousel">
-                {#            indicators #}
-                <ol class="carousel-indicators">
-                    {% set carousel_count=0 %}
-                    {%- for image_url in results['pixabay']['images'] %}
-                        {% if carousel_count==0 %}
-                            <li data-target="#carousel" data-slide-to="{{ loop.index }}" class="active"></li>
-                            {% set carousel_count=carousel_count + 1 %}
-                        {% elif carousel_count >=1 %}
-                            <li data-target="#carousel" data-slide-to="{{ loop.index }}"></li>
-                        {% endif %}
-                    {% endfor %}
-                </ol>
+  </div><!--END ROW-->
 
+  <div class="row-fluid">
+    <!-- MAIN TWITTER CAROUSEL -->
+    <div class="col-sm-4" id="slider">
 
-                <div class="carousel-inner" role="listbox">
+      {%- if results['Twitter']|length > 0 %}
+{#        <div class="" id="twitter-box">#}
+          <!-- Twitter Carousel -->
+          <div id="tweetCarousel" class="carousel slide vertical">
+            <!-- Wrapper for Tweets -->
+            <div class="carousel-inner" role="listbox">
+              {% set tweet_count = 0 %}
+              {%- for tweet in results['Twitter'] %}
 
-                    {% set count2 = 0 %}
-                    {%- for image_url in results['pixabay']['images'] %}
-                        {% if count2 == 0 %}
-                            <div class="item active">
-                                <img src="{{ url_for('static', filename = 'images/pixabay/' ) }}{{ image_url }}"
-                                     height="400">
-                                {% set count2 = count2 + 1 %}
-                            </div>
-                        {% elif count2 >= 1 %}
-                            <div class="item">
-                                <img src="{{ url_for('static', filename = 'images/pixabay/' ) }}{{ image_url }}"
-                                     height="400">
-                                {% set count2 = count2 + 1 %}
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-                {#    Controls#}
-                <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
-        {% else %}
-            <h3>NO IMAGES WERE FOUND</h3>
-        {%- endif %}
-
-    </div>
-    {#HERE ENDS THE IMAGE CAROUSEL#}
-</div>
-<div class="tall_col col-sm-12">
-    {#    THIS SECTION WILL ONLY ADD TWEETS IF THEY EXIST AND DO THREE IN A ROW, THEN THREE MORE#}
-    {%- if results['Twitter']|length > 0 %}
-        {% for tweet in results['Twitter'] %}
-            {% if (loop.index % 4 == 0) or loop.index==1  %}
-            <div class="col-sm-12 row">
-                <div class="alert alert-warning col-sm-3 alert-dismissable fade in">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                {% if tweet_count == 0 %}
+                  <div class="active item" id="tweets">
                     <strong>User: {{ results['Twitter'][loop.index - 1]['User'] }}</strong>
                     <p>Text: {{ results['Twitter'][loop.index - 1]['Text'] }}</p>
+                    {% set tweet_count = tweet_count + 1 %}
+                  </div>
+
+                {% else %}
+                  <div class="item" id="tweets">
+                    <strong>User: {{ results['Twitter'][loop.index - 1]['User'] }}</strong>
+                    <p>Text: {{ results['Twitter'][loop.index - 1]['Text'] }}</p>
+                    {% set tweet_count = tweet_count + 1 %}
+                  </div>
+
+                {% endif %}
+              {% endfor %}
+            </div><!--/Wrapper for Tweets-->
+
+            <!-- Nav Controls -->
+            <a class="carousel-control vertical prev" href="#tweetCarousel" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span></a>
+            <a class="carousel-control vertical next" href="#tweetCarousel" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+              <span class="sr-only">Next</span></a>
+          </div><!--/Twitter Carousel-->
+
+{#        </div><!--/Twitter Box-->#}
+      {%- endif %}
+    </div><!--/Slider-->
+
+    <!-- IMAGE CAROUSEL -->
+    <div class="col-sm-8">
+      {%- if results['pixabay']['images']|length > 0 %}
+        <div id="image-carousel" class="carousel slide" data-ride="carousel">
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+            {% set carousel_count=0 %}
+            {%- for image_url in results['pixabay']['images'] %}
+              {% if carousel_count==0 %}
+                <li data-target="#image-carousel" data-slide-to="{{ loop.index }}" class="active"></li>
+                {% set carousel_count=carousel_count + 1 %}
+              {% elif carousel_count >=1 %}
+                <li data-target="#image-carousel" data-slide-to="{{ loop.index }}"></li>
+              {% endif %}
+            {% endfor %}
+          </ol>
+
+          <!--Wrapper for Slides-->
+          <div class="carousel-inner" role="listbox">
+            {% set count2 = 0 %}
+            {%- for image_url in results['pixabay']['images'] %}
+              {% if count2 == 0 %}
+                <div class="item active">
+                  <img src="{{ url_for('static', filename = 'images/pixabay/' ) }}{{ image_url }}">
+                  {#                                         height="400">#}
+                  {% set count2 = count2 + 1 %}
                 </div>
-            </div>
-            {% endif %}
+              {% elif count2 >= 1 %}
+                <div class="item">
+                  <img src="{{ url_for('static', filename = 'images/pixabay/' ) }}{{ image_url }}">
+                  {#                                         height="400">#}
+                  {% set count2 = count2 + 1 %}
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
 
-        {% endfor %}
+          <!--Controls-->
+          <a class="left carousel-control" href="#image-carousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="right carousel-control" href="#image-carousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      {% else %}
+        <h3>NO IMAGES WERE FOUND</h3>
+      {%- endif %}
 
-    {%- endif %}
-</div>
+    </div><!--END IMAGE CAROUSEL-->
+  </div><!--END ROW-->
+</div><!--END CONTAINER-->
+
 <script>
-    $(document).load()
+  $(document).load()
 </script>
+<script type="application/javascript">
+  $('#tweetCarousel' +
+      '').carousel({
+    interval: 4000
+  });
+
+  // handles the carousel thumbnails
+  $('[id^=carousel-selector-]').click(function () {
+    var id_selector = $(this).attr("id");
+    var id = id_selector.substr(id_selector.length - 1);
+    id = parseInt(id);
+    $('#tweetCarousel' +
+        '').carousel(id);
+    $('[id^=carousel-selector-]').removeClass('selected');
+    $(this).addClass('selected');
+  });
+
+  // when the carousel slides, auto update
+  $('#tweetCarousel').on('slid', function (e) {
+    var id = $('.item.active').data('slide-number');
+    id = parseInt(id);
+    $('[id^=carousel-selector-]').removeClass('selected');
+    $('[id=carousel-selector-' + id + ']').addClass('selected');
+  });
+</script>
+</body>
+</html>
+{#<div class="tall_col col-sm-12">#}
+{#    THIS SECTION WILL ONLY ADD TWEETS IF THEY EXIST AND DO THREE IN A ROW, THEN THREE MORE#}
+{#    {%- if results['Twitter']|length > 0 %}#}
+{#        {% for tweet in results['Twitter'] %}#}
+{#            {% if (loop.index % 4 == 0) or loop.index==1  %}#}
+{#            <div class="col-sm-12 row">#}
+{#                <div class="alert alert-warning col-sm-3 alert-dismissable fade in">#}
+{#                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>#}
+{#                    <strong>User: {{ results['Twitter'][loop.index - 1]['User'] }}</strong>#}
+{#                    <p>Text: {{ results['Twitter'][loop.index - 1]['Text'] }}</p>#}
+{#                </div>#}
+{#            </div>#}
+{#            {% endif %}#}
+{##}
+{#        {% endfor %}#}
+{##}
+{#    {%- endif %}#}
+{#</div>#}
